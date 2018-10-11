@@ -1,0 +1,9 @@
+# Maven files
+target
+
+# IntelliJ Files
+.idea
+*.iml
+
+# Non-project files
+CT417 - Assignment 1(3).pdf
