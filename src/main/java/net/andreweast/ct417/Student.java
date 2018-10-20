@@ -5,17 +5,15 @@ import org.joda.time.DateTime;
 public class Student {
     private String firstName;
     private String lastName;
-    private int age;
     private DateTime dob;
     private String id;
     // TOOD: Modules
     // TODO: Courses?
 
 
-    public Student(String firstName, String lastName, int age, DateTime dob, String id) {
+    public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.dob = dob;
         this.id = id;
     }
@@ -25,7 +23,7 @@ public class Student {
      * @return A generate student's username
      */
     public String getUsername() {
-            return firstName.substring(0, 1).toLowerCase() + lastName.toLowerCase() + age;
+            return firstName.substring(0, 1).toLowerCase() + lastName.toLowerCase() + this.getAge();
     }
 
     public String getFirstName() {
@@ -44,12 +42,22 @@ public class Student {
         this.lastName = lastName;
     }
 
+    /**
+     * Generate student's age based on their date of birth and Now
+     * @return Student age
+     */
     public int getAge() {
-        return age;
+        // Year calculation is adjusted for Daylight Savings time via method explained here: https://stackoverflow.com/a/17959137/5271224
+        return Years.yearsBetween(dob.toLocalDate(), today().toLocalDate()).getYears();
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    /**
+     * A helper method to abstract away finding the current date/time
+     * Allows for proper mocking of a constructor w/o resorting to bytecode-rewriting powermock
+     * @return Now
+     */
+    protected DateTime today() {
+        return new DateTime();
     }
 
     public DateTime getDob() {
