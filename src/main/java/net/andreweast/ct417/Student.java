@@ -4,11 +4,11 @@ import org.joda.time.DateTime;
 import org.joda.time.Years;
 
 public class Student {
-    private String firstName;
-    private String lastName;
-    private DateTime dob;
-    private String id;
-    // TOOD: Modules
+    protected String firstName;
+    protected String lastName;
+    protected DateTime dob;
+    protected String id;
+    // TODO: Modules
     // TODO: Courses?
 
 
