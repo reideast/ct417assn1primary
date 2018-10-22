@@ -57,6 +57,10 @@ public class CourseTest {
         assertThat(testCourse.removeStudent(students.get(3)), is(false));
         assertThat(testCourse.getCourseSize(), is(2));
 
+        // Cannot remove a student again
+        assertThat(testCourse.removeStudent(students.get(2)), is(false));
+        assertThat(testCourse.getCourseSize(), is(2));
+
         assertThat(testCourse.removeStudent(students.get(0)), is(true));
         assertThat(testCourse.removeStudent(students.get(1)), is(true));
         assertThat(testCourse.getCourseSize(), is(0));
