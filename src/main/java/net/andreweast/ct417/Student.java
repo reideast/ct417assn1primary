@@ -3,6 +3,8 @@ package net.andreweast.ct417;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
+import java.util.ArrayList;
+
 /**
  * Defines a student who is attending an academic program
  * Defined by their name, student id, and date of birth. Can generate a user's login
@@ -10,19 +12,28 @@ import org.joda.time.Years;
  * Instances of this class will be added to a {@link Module} as a student enrolls in individual modules
  */
 public class Student {
-    protected String firstName;
-    protected String lastName;
-    protected DateTime dob;
-    protected String id;
+    private String firstName;
+    private String lastName;
+    private DateTime dob;
+    private String id;
 
-    // Implementation note: Module class maintains a list of enrolled students, and Student class DOESN'T keep a list of Modules in order to avoid circular hierarchy
-    // Implementation note: Same again, for Course class
+    // A list of modules this student has enrolled in, intended to be a read-only property (publicly)
+    // It may be modified by modules and courses, but no outside classes
+    // This is enforced via the "no access modifier specified" rather than public/private,
+    // restricting access to only other classes within this package
+    private ArrayList<Module> enrolledModules;
+
+    // List of courses this student belongs to, which is read-only to any outside classes
+    private ArrayList<Course> registeredCourses;
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dob = dob;
         this.id = id;
+
+        this.enrolledModules = new ArrayList<>();
+        this.registeredCourses = new ArrayList<>();
     }
 
     /**
@@ -31,6 +42,41 @@ public class Student {
      */
     public String getUsername() {
             return firstName.substring(0, 1).toLowerCase() + lastName.toLowerCase() + this.getAge();
+    }
+
+    /**
+     * Get a student's list of modules they're taking, but as a clone to prevent modification
+     * @return Array of modules
+     */
+    public Module[] getEnrolledModules() {
+        return enrolledModules.toArray(new Module[0]);
+    }
+
+    /**
+     * Pseudo-private method meant to only be used by other classes in this package
+     */
+    void addModule(Module module) {
+        enrolledModules.add(module);
+    }
+
+    boolean removeModule(Module module) {
+        return enrolledModules.remove(module);
+    }
+
+    /**
+     * Get a student's course they're a part of
+     * @return Array of courses
+     */
+    public Course[] getRegisteredCourses() {
+        return registeredCourses.toArray(new Course[0]);
+    }
+
+    void addCourse(Course course) {
+        registeredCourses.add(course);
+    }
+
+    boolean removeCourse(Course course) {
+        return registeredCourses.remove(course);
     }
 
     public String getFirstName() {

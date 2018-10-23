@@ -12,11 +12,11 @@ import java.util.Collection;
  * Along with the modules that are taught as a part of this course
  */
 public class Course {
-    protected String courseName;
-    protected DateTime startDate;
-    protected DateTime endDate;
-    protected ArrayList<Student> registeredStudents;
-    protected ArrayList<Module> courseModules;
+    private String courseName;
+    private DateTime startDate;
+    private DateTime endDate;
+    private ArrayList<Student> registeredStudents;
+    private ArrayList<Module> courseModules;
 
     public Course(String courseName, DateTime startDate, DateTime endDate) {
         this.courseName = courseName;
