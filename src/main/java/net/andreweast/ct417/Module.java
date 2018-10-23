@@ -3,11 +3,11 @@ package net.andreweast.ct417;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Course {
+public class Module {
     protected String moduleName;
     protected ArrayList<Student> enrolledStudents;
 
-    public Course(String moduleName) {
+    public Module(String moduleName) {
         this.moduleName = moduleName;
         this.enrolledStudents = new ArrayList<>();
     }
@@ -25,11 +25,11 @@ public class Course {
     }
 
     /**
-     * Get the list of students in the course
+     * Get the list of students in the module
      * Use a method that shallow-clones the list of enrolled students in order to keep the public API of this class protecting the private data
      * @return Student[] list of enrolled students
      */
-    public Student[] getCourseRoster() {
+    public Student[] getModuleRoster() {
         return enrolledStudents.toArray(new Student[0]);
     }
 
@@ -41,7 +41,7 @@ public class Course {
         this.moduleName = moduleName;
     }
 
-    public int getCourseSize() {
+    public int getModuleSize() {
         return enrolledStudents.size();
     }
 }

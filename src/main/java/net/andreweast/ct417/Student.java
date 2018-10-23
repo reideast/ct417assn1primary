@@ -9,8 +9,8 @@ public class Student {
     protected DateTime dob;
     protected String id;
 
-    // Implementation note: Course class maintains a list of enrolled students, and this class doesn't keep a list of Courses in order to avoid circular hierarchy
-    // Implementation note: Again, for Module class
+    // Implementation note: Module class maintains a list of enrolled students, and Student class DOESN'T keep a list of Modules in order to avoid circular hierarchy
+    // Implementation note: Again, for Course class
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;
