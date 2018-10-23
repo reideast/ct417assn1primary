@@ -59,7 +59,7 @@ public class ModuleTest {
     @Test
     public void enrollStudentList() {
         assertThat(testModule.getModuleSize(), is(0));
-        testModule.enrollStudentList(students);
+        testModule.enrollStudents(students);
         assertThat(testModule.getModuleSize(), is(students.size()));
     }
 

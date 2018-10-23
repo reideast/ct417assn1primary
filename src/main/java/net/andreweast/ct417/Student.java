@@ -3,6 +3,12 @@ package net.andreweast.ct417;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
+/**
+ * Defines a student who is attending an academic program
+ * Defined by their name, student id, and date of birth. Can generate a user's login
+ * Instances of this class will be added to a {@link Course} as a student is registered to belong to that cohort
+ * Instances of this class will be added to a {@link Module} as a student enrolls in individual modules
+ */
 public class Student {
     protected String firstName;
     protected String lastName;
@@ -10,7 +16,7 @@ public class Student {
     protected String id;
 
     // Implementation note: Module class maintains a list of enrolled students, and Student class DOESN'T keep a list of Modules in order to avoid circular hierarchy
-    // Implementation note: Again, for Course class
+    // Implementation note: Same again, for Course class
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;

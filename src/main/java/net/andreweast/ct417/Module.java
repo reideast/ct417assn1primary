@@ -3,9 +3,17 @@ package net.andreweast.ct417;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Defines a university module
+ * Identified by its the module name
+ * Contains reference to the students who have enrolled for instruction
+ * Instances of this class will be added to a {@link Course}
+ */
 public class Module {
     protected String moduleName;
     protected ArrayList<Student> enrolledStudents;
+
+    // Implementation note: This class DOESN'T keep a list of courses it belongs to in order to avoid circular hierarchy
 
     public Module(String moduleName) {
         this.moduleName = moduleName;
@@ -16,7 +24,7 @@ public class Module {
         enrolledStudents.add(newStudent);
     }
 
-    public void enrollStudentList(Collection<? extends Student> newStudents) {
+    public void enrollStudents(Collection<? extends Student> newStudents) {
         enrolledStudents.addAll(newStudents);
     }
 
