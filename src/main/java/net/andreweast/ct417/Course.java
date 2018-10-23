@@ -24,6 +24,15 @@ public class Course {
         return enrolledStudents.remove(dropout);
     }
 
+    /**
+     * Get the list of students in the course
+     * Use a method that shallow-clones the list of enrolled students in order to keep the public API of this class protecting the private data
+     * @return Student[] list of enrolled students
+     */
+    public Student[] getCourseRoster() {
+        return enrolledStudents.toArray(new Student[0]);
+    }
+
     public String getModuleName() {
         return moduleName;
     }

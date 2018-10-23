@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 public class CourseTest {
@@ -27,6 +29,24 @@ public class CourseTest {
     @Before
     public void init() {
         testCourse = new Course("CT123");
+    }
+
+    @Test
+    public void getCourseRoster() {
+        testCourse.enrollStudent(students.get(0));
+        testCourse.enrollStudent(students.get(1));
+        testCourse.enrollStudent(students.get(2));
+        Student[] enrolled = testCourse.getCourseRoster();
+
+        StringBuilder studentList = new StringBuilder();
+        for (Student student : enrolled) {
+            studentList.append(student.firstName).append(' ').append(student.lastName).append(", ");
+        }
+
+        assertThat(studentList.toString(), containsString("Jane Doe"));
+        assertThat(studentList.toString(), containsString("Mary Doe"));
+        assertThat(studentList.toString(), containsString("John Doe"));
+        assertThat(studentList.toString(), not(containsString("Lisa Doe")));
     }
 
     @Test

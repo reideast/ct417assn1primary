@@ -8,9 +8,9 @@ public class Student {
     protected String lastName;
     protected DateTime dob;
     protected String id;
-    // TODO: Modules
-    // TODO: Courses?
 
+    // Implementation note: Course class maintains a list of enrolled students, and this class doesn't keep a list of Courses in order to avoid circular hierarchy
+    // Implementation note: Again, for Module class
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;
@@ -21,7 +21,7 @@ public class Student {
 
     /**
      * Generate a student username by "concatenating their name and age"
-     * @return A generate student's username
+     * @return A generated student username
      */
     public String getUsername() {
             return firstName.substring(0, 1).toLowerCase() + lastName.toLowerCase() + this.getAge();
