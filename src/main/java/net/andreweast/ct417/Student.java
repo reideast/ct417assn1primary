@@ -23,7 +23,7 @@ public class Student {
     // restricting access to only other classes within this package
     private ArrayList<Module> enrolledModules;
 
-    // List of courses this student belongs to, which is read-only to any outside classes
+    // List of courses this student belongs to, similarly is read-only to any outside classes
     private ArrayList<Course> registeredCourses;
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
@@ -53,28 +53,25 @@ public class Student {
     }
 
     /**
-     * Pseudo-private method meant to only be used by other classes in this package
-     */
-    void addModule(Module module) {
-        enrolledModules.add(module);
-    }
-
-    boolean removeModule(Module module) {
-        return enrolledModules.remove(module);
-    }
-
-    /**
-     * Get a student's course they're a part of
+     * Get a student's course they're a part of (clone)
      * @return Array of courses
      */
     public Course[] getRegisteredCourses() {
         return registeredCourses.toArray(new Course[0]);
     }
 
+    /**
+     * Pseudo-private mutator methods meant to only be used by other classes in this package
+     */
+    void addModule(Module module) {
+        enrolledModules.add(module);
+    }
+    boolean removeModule(Module module) {
+        return enrolledModules.remove(module);
+    }
     void addCourse(Course course) {
         registeredCourses.add(course);
     }
-
     boolean removeCourse(Course course) {
         return registeredCourses.remove(course);
     }

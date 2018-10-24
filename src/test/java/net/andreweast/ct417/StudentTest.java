@@ -49,4 +49,13 @@ public class StudentTest {
         // Un-freeze time
         DateTimeUtils.setCurrentMillisSystem();
     }
+
+    @Test
+    public void unregisteredStudent() {
+        Student student = new Student("Jane", "Doe", new DateTime(), "11223344");
+
+        // Before a student is added to a course or module, their list of parent pointers should be empty
+        assertThat(student.getEnrolledModules().length, is(0));
+        assertThat(student.getRegisteredCourses().length, is(0));
+    }
 }

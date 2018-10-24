@@ -26,32 +26,63 @@ public class Course {
         this.registeredStudents = new ArrayList<>();
     }
 
-    public void addModule(Module module) {
+    public void addModule(Module module) throws DuplicateRegistrationException {
+        if (courseModules.contains(module)) {
+            throw new DuplicateRegistrationException("Module has already been added to this course");
+        }
+
         courseModules.add(module);
+
+        module.addCourse(this);
     }
 
-    public void addModules(Collection<? extends Module> modules) {
+    public void addModules(Collection<? extends Module> modules) throws DuplicateRegistrationException {
+        for (Module module : modules) {
+            if (courseModules.contains(module)) {
+                throw new DuplicateRegistrationException("Module has already been added to this course");
+            }
+            module.addCourse(this);
+        }
         courseModules.addAll(modules);
     }
 
-    public boolean removeModule(Module module) {
-        return courseModules.remove(module);
+    public void removeModule(Module module) throws RegistrationDoesNotExistException {
+        if (!courseModules.remove(module)) {
+            throw new RegistrationDoesNotExistException("Module was not previously added to this course");
+        }
+        module.removeCourse(this);
     }
 
     public Module[] getModuleList() {
         return courseModules.toArray(new Module[0]);
     }
 
-    public void registerStudent(Student newStudent) {
+    public void registerStudent(Student newStudent) throws DuplicateRegistrationException {
+        if (registeredStudents.contains(newStudent)) {
+            throw new DuplicateRegistrationException("Student is already registered for this course");
+        }
+
         registeredStudents.add(newStudent);
+
+        newStudent.addCourse(this);
     }
 
-    public void registerStudents(Collection<? extends Student> newStudents) {
+    public void registerStudents(Collection<? extends Student> newStudents) throws DuplicateRegistrationException {
+        for (Student newStudent : newStudents) {
+            if (registeredStudents.contains(newStudent)) {
+                throw new DuplicateRegistrationException("A student is already registered for this course");
+            }
+            newStudent.addCourse(this);
+        }
+
         registeredStudents.addAll(newStudents);
     }
 
-    public boolean removeStudent(Student dropout) {
-        return registeredStudents.remove(dropout);
+    public void removeStudent(Student dropout) throws RegistrationDoesNotExistException {
+        if (!registeredStudents.remove(dropout)) {
+            throw new RegistrationDoesNotExistException("Student has not been registered for this course");
+        }
+        dropout.removeCourse(this);
     }
 
     /**

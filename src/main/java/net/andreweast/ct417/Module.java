@@ -13,11 +13,14 @@ public class Module {
     private String moduleName;
     private ArrayList<Student> enrolledStudents;
 
-    // TODO: // Implementation note: This class DOESN'T keep a list of courses it belongs to in order to avoid circular hierarchy
+    // List of courses this Module is a member of, and can only be accessed as a read-only list from outside this package
+    private ArrayList<Course> associatedCourses;
 
     public Module(String moduleName) {
         this.moduleName = moduleName;
         this.enrolledStudents = new ArrayList<>();
+
+        this.associatedCourses = new ArrayList<>();
     }
 
     public void enrollStudent(Student newStudent) throws DuplicateRegistrationException {
@@ -55,6 +58,24 @@ public class Module {
      */
     public Student[] getModuleRoster() {
         return enrolledStudents.toArray(new Student[0]);
+    }
+
+    /**
+     * Get the courses that this Module has been associated with
+     * @return Array of courses
+     */
+    public Course[] getAssociatedCourses() {
+        return associatedCourses.toArray(new Course[0]);
+    }
+
+    /**
+     * Pseudo-private mutator methods meant to only be used by other classes in this package
+     */
+    void addCourse(Course course) {
+        associatedCourses.add(course);
+    }
+    boolean removeCourse(Course course) {
+        return associatedCourses.remove(course);
     }
 
     public String getModuleName() {
