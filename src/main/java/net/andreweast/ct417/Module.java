@@ -2,6 +2,7 @@ package net.andreweast.ct417;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Defines a university module
@@ -14,13 +15,13 @@ public class Module {
     private ArrayList<Student> enrolledStudents;
 
     // List of courses this Module is a member of, and can only be accessed as a read-only list from outside this package
-    private ArrayList<Course> associatedCourses;
+    private HashSet<Course> associatedCourses;
 
     public Module(String moduleName) {
         this.moduleName = moduleName;
         this.enrolledStudents = new ArrayList<>();
 
-        this.associatedCourses = new ArrayList<>();
+        this.associatedCourses = new HashSet<>();
     }
 
     public void enrollStudent(Student newStudent) throws DuplicateRegistrationException {

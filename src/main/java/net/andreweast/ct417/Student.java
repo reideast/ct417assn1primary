@@ -3,7 +3,7 @@ package net.andreweast.ct417;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Defines a student who is attending an academic program
@@ -21,10 +21,10 @@ public class Student {
     // It may be modified by modules and courses, but no outside classes
     // This is enforced via the "no access modifier specified" rather than public/private,
     // restricting access to only other classes within this package
-    private ArrayList<Module> enrolledModules;
+    private HashSet<Module> enrolledModules;
 
     // List of courses this student belongs to, similarly is read-only to any outside classes
-    private ArrayList<Course> registeredCourses;
+    private HashSet<Course> registeredCourses;
 
     public Student(String firstName, String lastName, DateTime dob, String id) {
         this.firstName = firstName;
@@ -32,8 +32,8 @@ public class Student {
         this.dob = dob;
         this.id = id;
 
-        this.enrolledModules = new ArrayList<>();
-        this.registeredCourses = new ArrayList<>();
+        this.enrolledModules = new HashSet<>();
+        this.registeredCourses = new HashSet<>();
     }
 
     /**
